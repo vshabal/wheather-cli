@@ -5,9 +5,13 @@ import { parseArgs } from './utils/parseArgs.js';
 export class AppParams {
     static #cityKeyName = 'city';
 
+    static #tokenKeyName = 'token';
+
     #shouldDisplayHelp = false;
 
     #city;
+
+    #token;
     
     constructor() {}
 
@@ -20,6 +24,10 @@ export class AppParams {
         
         if (args.c) {
             await appParams.#setCity(args.c);
+        }
+
+        if (args.t) {
+            await appParams.#setToken(args.t);
         }
 
         return appParams;
@@ -50,6 +58,28 @@ export class AppParams {
             }
     
             return await getValueByKey(AppParams.#cityKeyName);
+        } catch (error) {
+            logError(error);
+        }
+    }
+
+    async #setToken(value) {
+        try {
+            this.#token = value;
+            await saveKeyValue(AppParams.#tokenKeyName, value);
+            logSuccess('token was saved', value);
+        } catch (error) {
+            logError(error);
+        }
+    }
+
+    async getToken() {
+        try {
+            if (this.#token) {
+                return await Promise.resolve(this.#token);
+            }
+    
+            return await getValueByKey(AppParams.#tokenKeyName);
         } catch (error) {
             logError(error);
         }

@@ -19,6 +19,7 @@ export class App {
     async start() {
         this.#printHelpConditionally();
         logDebug('city', await this.#appParams.getCity());
+        logDebug('token', await this.#appParams.getToken());
     }
 
     #printHelpConditionally() {
