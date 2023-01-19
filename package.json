@@ -1,0 +1,22 @@
+{
+  "name": "wheather-cli",
+  "version": "1.0.0",
+  "description": "cli which outputs data about wheather",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vshabal/wheather-cli.git"
+  },
+  "keywords": [
+    "wheather"
+  ],
+  "author": "vshabal",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vshabal/wheather-cli/issues"
+  },
+  "homepage": "https://github.com/vshabal/wheather-cli#readme"
+}
