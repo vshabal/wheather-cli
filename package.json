@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/vshabal/wheather-cli/issues"
   },
-  "homepage": "https://github.com/vshabal/wheather-cli#readme"
+  "homepage": "https://github.com/vshabal/wheather-cli#readme",
+  "dependencies": {
+    "chalk": "5.2.0"
+  }
 }
