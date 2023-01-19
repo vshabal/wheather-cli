@@ -1,5 +1,5 @@
 import { AppParams } from './AppParams.js';
-import { logHelp } from './services/log.js';
+import { logDebug, logHelp } from './services/log.js';
 
 export class App {
     #appParams;
@@ -10,14 +10,15 @@ export class App {
         this.#appParams = appParams;
     }
 
-    static init(paramsString) {
-        const appParams = AppParams.init(paramsString);
+    static async init(paramsString) {
+        const appParams = await AppParams.init(paramsString);
 
         return new App(appParams);
     }
 
-    start() {
+    async start() {
         this.#printHelpConditionally();
+        logDebug('city', await this.#appParams.getCity());
     }
 
     #printHelpConditionally() {

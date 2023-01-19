@@ -1,4 +1,5 @@
 import { App } from './App.js';
 
-const app = App.init(process.argv);
-app.start();
+App.init(process.argv).then((app) => {
+    app.start();
+});
