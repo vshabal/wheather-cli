@@ -1,21 +1,32 @@
-import { logDebug } from './services/log.js';
+import { AppParams } from './AppParams.js';
+import { logHelp } from './services/log.js';
 
 export class App {
-    #paramsString;
+    #appParams;
 
-    constructor(paramsString) {
-        logDebug('[App.constructor]', paramsString);
+    static #helpString = '-h ouput help' + '\n';
 
-        this.#paramsString = paramsString;
+    constructor(appParams) {
+        this.#appParams = appParams;
     }
 
     static init(paramsString) {
-        logDebug('[App.init], paramsString', paramsString);
-    
-        return new App(paramsString);
+        const appParams = AppParams.init(paramsString);
+
+        return new App(appParams);
     }
 
     start() {
-        logDebug('[App.start]', 'app started');
+        this.#printHelpConditionally();
+    }
+
+    #printHelpConditionally() {
+        if (this.#appParams.getShouldDisplayHelp()) {
+            this.#printHelp();
+        }
+    }
+
+    #printHelp() {
+        logHelp(App.#helpString);
     }
 }

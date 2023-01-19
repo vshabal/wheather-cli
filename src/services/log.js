@@ -5,4 +5,9 @@ const logDebug = (...info) => {
     console.log(header, ...info);
 }
 
-export { logDebug };
+const logHelp = (...info) => {
+    const header = chalk.bgCyan('HELP');
+    console.log(header, ...info);
+}
+
+export { logDebug, logHelp };
