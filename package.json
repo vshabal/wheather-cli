@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "cli which outputs data about wheather",
   "main": "index.js",
+  "bin": {
+    "weather": "src/index.js"
+  },
   "type": "module",
   "scripts": {
     "start": "node src/index.js"
