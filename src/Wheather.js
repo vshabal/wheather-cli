@@ -6,6 +6,12 @@ export class Wheather {
 
     #token = '';
 
+    static #loadSuccessfulMessage = 'here are the weather \n';
+
+    static #loadErrorMessage = 'there were problems with loading wheather \n';
+
+    static #notEnoughParamsErrorMessage = 'city and token are required to load wheather';
+
     constructor(city, token) {
         this.#city = city;
         this.#token = token;
@@ -15,12 +21,12 @@ export class Wheather {
         if (this.#canLoad()) {
             try {
                 const weather = await this.#get(this.#city, this.#token);
-                logSuccess('here are the weather \n', weather.data);
+                logSuccess(Wheather.#loadSuccessfulMessage, weather.data);
             } catch (error) {
-                logError('there were problems with loading wheather \n', error.message);
+                logError(Wheather.#loadErrorMessage, error.message);
             }
         } else {
-            logError('city and token are required to load whether');
+            logError(Wheather.#notEnoughParamsErrorMessage);
         }
     }
 

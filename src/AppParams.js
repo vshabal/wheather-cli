@@ -7,6 +7,10 @@ export class AppParams {
 
     static #tokenKeyName = 'token';
 
+    static #cityWasSetMessage = 'city was saved';
+
+    static #tokenWasSetMessage = 'token was saved';
+
     #shouldDisplayHelp = false;
 
     #city = '';
@@ -46,7 +50,7 @@ export class AppParams {
         try {
             this.#city = value;
             await saveKeyValue(AppParams.#cityKeyName, value);
-            logSuccess('city was saved', value);
+            logSuccess(AppParams.#cityWasSetMessage, value);
         } catch (error) {
             logError(error);
         }
@@ -68,7 +72,7 @@ export class AppParams {
         try {
             this.#token = value;
             await saveKeyValue(AppParams.#tokenKeyName, value);
-            logSuccess('token was saved', value);
+            logSuccess(AppParams.#tokenWasSetMessage, value);
         } catch (error) {
             logError(error);
         }
