@@ -1,5 +1,5 @@
-import { httpGet } from './services/http.js';
 import { logError, logSuccess } from './services/log.js';
+import { WheatherAPI } from './WheaterAPI.js';
 
 export class Wheather {
     #city = '';
@@ -20,7 +20,7 @@ export class Wheather {
     async load() {
         if (this.#canLoad()) {
             try {
-                const weather = await this.#get(this.#city, this.#token);
+                const weather = await this.#get();
                 logSuccess(Wheather.#loadSuccessfulMessage, weather.data);
             } catch (error) {
                 logError(Wheather.#loadErrorMessage, error.message);
@@ -34,11 +34,9 @@ export class Wheather {
         return [this.#city, this.#token].every((param) => !!param);
     }
 
-    async #get(city, token) {
-        const url = new URL('https://api.openweathermap.org/data/2.5/weather');
-        url.searchParams.append('q', city);
-        url.searchParams.append('appid', token);
-        
-        return await httpGet(url.toString());
+    async #get() {
+        const wheatherAPI = new WheatherAPI(this.#city, this.#token);
+
+        return wheatherAPI.get();
     }
 }
