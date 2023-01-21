@@ -9,9 +9,9 @@ export class AppParams {
 
     #shouldDisplayHelp = false;
 
-    #city;
+    #city = '';
 
-    #token;
+    #token = '';
     
     constructor() {}
 
