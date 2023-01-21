@@ -1,11 +1,10 @@
 import { AppParams } from './AppParams.js';
+import { Help } from './Help.js';
 import { httpGet } from './services/http.js';
-import { logError, logHelp, logSuccess } from './services/log.js';
+import { logError, logSuccess } from './services/log.js';
 
 export class App {
     #appParams;
-
-    static #helpString = '-h ouput help' + '\n';
 
     constructor(appParams) {
         this.#appParams = appParams;
@@ -18,7 +17,9 @@ export class App {
     }
 
     async start() {
-        this.#printHelpConditionally();
+        const help = new Help(this.#appParams.getShouldDisplayHelp());
+        help.print();
+
         const city = await this.#appParams.getCity()
         const token = await this.#appParams.getToken()
         const areParamsEnoughToLoadWheather = [city, token].every((appParam) => !!appParam);
@@ -41,15 +42,5 @@ export class App {
         url.searchParams.append('appid', token);
         
         return await httpGet(url.toString());
-    }
-
-    #printHelpConditionally() {
-        if (this.#appParams.getShouldDisplayHelp()) {
-            this.#printHelp();
-        }
-    }
-
-    #printHelp() {
-        logHelp(App.#helpString);
     }
 }
