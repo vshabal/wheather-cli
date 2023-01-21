@@ -12,25 +12,26 @@ export class AppParams {
     #city = '';
 
     #token = '';
-    
-    constructor() {}
 
-    static async init(paramsString) {
-        const args = parseArgs(paramsString);
-        const appParams = new AppParams();
+    #paramsString = '';
+    
+    constructor(paramsString) {
+        this.#paramsString = paramsString;
+    }
+
+    async parseParams() {
+        const args = parseArgs(this.#paramsString);
         if (args.h) {
-            appParams.#setShouldDisplayHelp(true);
+            this.#setShouldDisplayHelp(true);
         }
         
         if (args.c) {
-            await appParams.#setCity(args.c);
+            await this.#setCity(args.c);
         }
 
         if (args.t) {
-            await appParams.#setToken(args.t);
+            await this.#setToken(args.t);
         }
-
-        return appParams;
     }
 
     #setShouldDisplayHelp(value) {

@@ -3,19 +3,15 @@ import { Help } from './Help.js';
 import { Wheather } from './Wheather.js';
 
 export class App {
-    #appParams;
+    #appParams = null;
 
-    constructor(appParams) {
-        this.#appParams = appParams;
-    }
-
-    static async init(paramsString) {
-        const appParams = await AppParams.init(paramsString);
-
-        return new App(appParams);
+    constructor(paramsString) {
+        this.#appParams = new AppParams(paramsString);
     }
 
     async start() {
+        await this.#appParams.parseParams();
+
         const help = new Help(this.#appParams.getShouldDisplayHelp());
         help.print();
 
